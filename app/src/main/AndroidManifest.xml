@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
         android:allowBackup="true"
@@ -11,6 +12,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CleaningServiceApp">
+
+
+        <activity
+            android:name=".ServiceDetailActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".BookingFormActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".BookingSuccessfulActivity"
+            android:exported="false" />
 
         <activity
             android:name=".SplashActivity"
@@ -37,6 +51,12 @@
 
         <activity
             android:name=".ForgotPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminDashboardActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BookingManagementActivity"
             android:exported="false" />
 
     </application>

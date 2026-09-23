@@ -3,4 +3,11 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="splash_background">#FFFFFF</color>
+
+    <color name="admin_total_bg">#FF3F51B5</color>
+    <color name="admin_pending_bg">#FFFF9800</color>
+    <color name="admin_accepted_bg">#FF2196F3</color>
+    <color name="admin_completed_bg">#FF4CAF50</color>
+    <color name="admin_cancelled_bg">#FFF44336</color>
+    <color name="text_light_purple">#FFD0BCFF</color>
 </resources>

@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="48dp"
             android:text="@string/login_title"
-            android:textColor="@color/black"
+            android:textColor="@color/text_light_purple"
             android:textSize="28sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/login_subtitle"
-            android:textColor="@color/black"
+            android:textColor="@color/text_light_purple"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -82,7 +82,7 @@
             android:layout_marginTop="12dp"
             android:padding="4dp"
             android:text="@string/forgot_password"
-            android:textColor="@color/black"
+            android:textColor="@color/text_light_purple"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/passwordInputLayout" />
@@ -100,16 +100,16 @@
             app:layout_constraintTop_toBottomOf="@id/forgotPasswordText" />
 
         <TextView
-        android:id="@+id/registerRedirectText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:padding="4dp"
-        android:text="@string/register_redirect"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/loginButton" />
+            android:id="@+id/registerRedirectText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:padding="4dp"
+            android:text="@string/register_redirect"
+            android:textColor="@color/text_light_purple"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/loginButton" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

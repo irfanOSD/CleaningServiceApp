@@ -7,6 +7,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.UserProfileChangeRequest
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -20,9 +22,14 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var passwordEditText: TextInputEditText
     private lateinit var confirmPasswordEditText: TextInputEditText
 
+    private lateinit var auth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+
+        // Firebase Auth ইনস্ট্যান্স নেওয়া হচ্ছে
+        auth = FirebaseAuth.getInstance()
 
         // View গুলো খুঁজে বের করা
         nameInputLayout = findViewById(R.id.nameInputLayout)
@@ -41,8 +48,7 @@ class RegisterActivity : AppCompatActivity() {
         // Register বাটনে ক্লিক করলে
         registerButton.setOnClickListener {
             if (validateInputs()) {
-                // এখানে পরে Firebase Register logic বসবে
-                Toast.makeText(this, "Validation passed! (Firebase register coming soon)", Toast.LENGTH_SHORT).show()
+                registerUser(registerButton)
             }
         }
 
@@ -51,6 +57,45 @@ class RegisterActivity : AppCompatActivity() {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
+    }
+
+    private fun registerUser(registerButton: com.google.android.material.button.MaterialButton) {
+        val name = nameEditText.text.toString().trim()
+        val email = emailEditText.text.toString().trim()
+        val password = passwordEditText.text.toString().trim()
+
+        // বাটন সাময়িকভাবে বন্ধ রাখা হচ্ছে, যাতে ইউজার একবারের বেশি ক্লিক করতে না পারে
+        registerButton.isEnabled = false
+
+        auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    // ইউজার তৈরি হয়ে গেছে, এখন তার নামটা প্রোফাইলে সেভ করা হচ্ছে
+                    val profileUpdates = UserProfileChangeRequest.Builder()
+                        .setDisplayName(name)
+                        .build()
+
+                    val currentUser = auth.currentUser
+                    currentUser?.updateProfile(profileUpdates)
+                        ?.addOnCompleteListener {
+                            registerButton.isEnabled = true
+                            Toast.makeText(
+                                this,
+                                "Registration successful! Please login.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            startActivity(Intent(this, LoginActivity::class.java))
+                            finish()
+                        }
+                } else {
+                    registerButton.isEnabled = true
+                    Toast.makeText(
+                        this,
+                        "Registration failed: ${task.exception?.message}",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
     }
 
     private fun validateInputs(): Boolean {
